@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load static %}
+{% block meta %}
+
+    <meta name="description" content="Welcome To My Blog!!! I'm Sakindu. This blog is made with Django and was made with the purpose of sharing my knowledge with others and displaying my tech projects...
+     I also have made an engaging comment system for your feedback on my blog posts and you can share my posts with others and follow me on other social networks. So, have a nice time! - Sakindu">
+
+
+    <title>Welcome To My Blog | Sakindu</title>
+
+    <meta name="keywords" content="HTML,CSS,Bootstrap 4,Django">
+{% endblock %}
+{% block page-content %}
+    <div class="container-fluid">
+        <div style="text-align: center; padding: 20px; min-height: 50vh; user-select: none;" class="bg-light shadow-lg rounded col-12">
+            <h2 style="display: inline-block; font-weight: lighter; text-shadow: 0 5px 3px gray;" class="text-dark" id="welcome">Welcome To My Blog</h2><br>
+            <mark class="text-muted kite">-Sakindu</mark><br>
+            <img src="{% static 'sakindu.png'%}" class="rounded-circle shadow-lg s" style="margin-top: 20px; max-width:80%;">
+        </div><br>
+        <div id="demo" class="carousel slide" data-ride="carousel" data-interval="3000">
+
+            <!-- Indicators -->
+            <ul class="carousel-indicators">
+            {% for index in indexes %}
+              <li data-target="#demo" data-slide-to="{{ index }}" class="active"></li>
+            {% endfor %}
+            </ul>
+          
+            <!-- The slideshow -->
+            <div class="carousel-inner rounded">
+            {% for r_post in r_posts %}
+              <div class="carousel-item {% if forloop.counter == 1 %} active {% endif %}">
+                <img src="{{ r_post.image }}" alt="{{ r_post.title }}" width="100%" style="max-height: 700px;">
+                <div class="carousel-caption">
+                    <h2 class="rounded" style="margin-bottom: 10px; padding: 10px 40px;display: inline-block; backdrop-filter: brightness(80%) blur(10px); font-size:2vw;">{{ r_post.title }}</h2>
+                    <p><a href="{% url 'post_detail' r_post.pk %}" role="button" class="btn btn-primary">Read More</a></p>
+                </div>
+              </div>
+            {% endfor %}
+            </div>
+          
+            <!-- Left and right controls -->
+            <a class="carousel-control-prev" href="#demo" data-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#demo" data-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </a>
+          
+          </div>
+        <div>
+            <h3 style="margin-top: 30px;">Some Projects <a href='{% url "projects_list" %}' role="button" class="btn btn-outline-primary">See All</a></h3><br>
+            <div class="container-fluid">
+                <div class="row flex-row flex-nowrap wrapper bg-white col-12 rounded" style="overflow-x: scroll;">
+                    {% for project in projects %}
+                        <div class="col-md-6 col-lg-4 col-sm-7 col-xl-3 align-self-center">
+                            <div class="card mb-2 special-card"  style="box-shadow: 0 0 20px 2px gray; margin: 0 0 30px 0;">
+                                <div style='overflow: hidden; max-height: auto; max-width: 100%;'><img class="card-img-top" src="{{ project.image }}"></div>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ project.title }}</h5>
+                                    <p class="card-text"> {{ project.body_summary|striptags }}</p>
+                                    <a href="{% url 'project_detail' project.pk %}"
+                                    class="btn btn-primary stretched-link">
+                                        Read More
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                   
+                    
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2 style="margin-left: 10px; margin-top: 30px;">Recent Posts <a href="{% url 'posts_list' %}" role="button" class="btn btn-outline-primary">See All</a></h2><br>
+            <div class="row" style="padding: 10px 10px 50px 10px;">
+                
+                {% for post in posts %}
+                    <div class="col-md-4">
+                        <div class="card mb-2"  style="box-shadow: 0 0 20px 2px gray; margin: 0 0 30px 0;">
+                            <div style='overflow: hidden; max-height: auto; max-width: 100%;'><img class="card-img-top" src="{{ post.image }}"></div>
+                            <div class="card-body" style="box-shadow: 0 -4px 15px rgb(71, 70, 70);">
+                                <h5 class="card-title">{{ post.title }}</h5>
+                                <p class="card-text"><a href="{% url 'post_detail' post.pk %}#comments" class="text-info card-link"> See Comments</a></p>
+                                <a href="{% url 'post_detail' post.pk %}"
+                                   class="btn btn-primary stretched-link">
+                                    Read Post
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+    </div>
+{% endblock %}

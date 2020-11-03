@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block page-content %}
+  {% if user.is_authenticated %}
+  <div style="padding: 10px 10px 10px 10px;">
+    <h2>New Project</h2><br>
+    
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-primary">Save</button>
+    </form><br>
+
+    {{ form.media }}
+  
+
+    
+  {% else %}
+    <h2>Sorry, you don't have access to this page...</h2>
+  {% endif %}
+  </div>
+{% endblock %}

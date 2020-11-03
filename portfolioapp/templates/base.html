@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  {% load static %}
+
+
+  <meta name="author" content="Sakindu">
+
+    <!-- Chrome, Firefox OS and Opera -->
+<meta name="theme-color" content="" class="meta">
+<!-- Windows Phone -->
+<meta name="msapplication-navbutton-color" content="" class="meta">
+<!-- iOS Safari -->
+<meta name="apple-mobile-web-app-status-bar-style" content="" class="meta">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+
+
+
+    {% block meta %}{% endblock %}
+
+
+    
+
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/Sakindu-d/SnapMusic/logo.jpg" type="image/gif">
+
+
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Chau+Philomene+One:ital@1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid&display=swap" rel="stylesheet">
+
+    <link rel='stylesheet' href="{% static 'main.css' %}">
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+    
+    <style>
+      html{
+        scroll-behavior: smooth;
+      }
+      .card:hover{
+        box-shadow: 0 0 10px 5px gray;
+      }
+      .special{
+        font-family: 'Chau Philomene One';
+        
+        font-weight: lighter;
+        
+      }
+      .l{
+        font-weight: lighter;
+        transition: 0.4s ease;
+
+      }
+      .l:hover{
+        background-color: rgba(34, 32, 37, 0.486);
+        border-radius: 5px;
+        box-shadow: 0 0 15px rgb(31, 21, 21);
+        transform: translateY(-7px);
+      }
+      .card-title{
+        font-family: 'Londrina Solid';
+        font-size: 26px;
+      }
+      .nav-link:hover{
+        text-shadow: 0 0 20px rgb(46, 46, 46);
+        color: rgb(243, 19, 19);
+      }
+     
+@keyframes fadein{
+    0%{
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    
+    100%{
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+@keyframes imgfade{
+  0%{
+    transform: translateX(200px);
+    opacity: 0;
+  }
+  100%{
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+.kite{
+  animation: fadein 1s ease;
+}
+.s{
+  animation: imgfade 1.5s ease-out;
+  
+}
+
+#welcome{
+    animation: fadein 1s ease-out;
+}
+      .commentitle{
+        transition:1s ease;
+        color:rgb(237, 194, 100);
+        background: -webkit-linear-gradient(45deg, rgb(152, 0, 190), rgb(255, 146, 3));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+      }
+      
+      .navbar{
+        font-weight:400;
+      }
+      .post-content img{
+        max-height:300px;
+        max-width:90%;
+      }
+      .post-content code{
+        background:rgb(16, 7, 27);
+        color:rgb(212, 221, 82);
+        padding: 10px 10px;
+        border-radius: 3px;
+        margin: 10px 0px;
+        max-width: 90%;
+        display:block;
+        max-height: 300px;
+        overflow:scroll;
+
+        -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;
+      }
+      .post-content code::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+      .post-content a{
+        
+        color:rgb(228, 131, 20);
+        background: -webkit-linear-gradient(180deg, rgb(94, 33, 235) 0%, rgb(255, 166, 0) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+        border-bottom: 1px black dashed;
+      }
+
+      .post-content{
+        font-family: 'Londrina Solid', sans-serif, monospace;
+      }
+
+
+
+      .my-footer{
+        background-image: linear-gradient(
+    to right,
+    rgba(249, 105, 14, 1) 0%,
+    rgb(93, 32, 153) 100%
+  );
+       
+      }
+
+      .socials{
+        user-select: none;
+      }
+     
+    </style>
+</head>
+<body style="overflow-x: hidden;">
+<div class="fixed-top">
+    <nav class="navbar navbar-expand-lg nav-col navbar-light bg-white" id="nav-b">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand special" href="/">
+          <img src="https://cdn.jsdelivr.net/gh/Sakindu-d/SnapMusic/logo.jpg" width="30" height="30" class="d-inline-block align-top rounded" alt="" style="box-shadow:  0 0 10px rgb(124, 118, 134);">
+          SAKINDU
+        </a>
+      
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item {% if request.path == '' %}active{% endif %}">
+              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            {% if user.is_authenticated and not request.path == '/projects/new/' %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'new_project' %}">New Project</a>
+            </li>
+            {% endif %}
+            {% if user.is_authenticated and not request.path == '/posts/new/' %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'post_new' %}">New Post</a>
+            </li>
+            {% endif %}
+            {% if not request.path == '/projects/' %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'projects_list' %}">Projects</a>
+            </li>
+            {% endif %}
+            {% if not request.path == '/posts/' %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'posts_list' %}">Posts</a>
+            </li>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/">Admin</a>
+            </li>
+            {% endif %}
+          </ul>
+          {% if request.path == '/projects/' %}
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search Projects.." aria-label="Search" id="inp" oninput="search()">
+            
+          </form>
+          {% elif request.path == '/posts/' %}
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search Posts.." aria-label="Search" id="inp" oninput="search()">
+            
+          </form>
+          {% elif request.path == '/' %}
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search Posts and Projects.." aria-label="Search" id="inp" oninput="search()">
+            
+          </form>
+          {% endif %}
+          
+        </div>
+      </nav>
+      <div id="scrollIndi">
+        <div class="bg-primary rounded" id="scrollIndicator"></div>
+      </div>
+      </div>
+<section style="transform: translateY(60px);" class="" id="top" style="background-color: #6c757d;">
+    <div class="bg-light d-flex justify-content-center" style=" width:100%; padding: 5px; padding-bottom: 50px; min-height: 80vh;">
+    {% block page-content %}{% endblock %}
+    </div>
+    <!-- Footer -->
+<footer class="my-footer font-small text-light pt-4 nav-col" >
+
+  <!-- Footer Links -->
+  <div class="container-fluid text-center">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-12" style="padding: 10px;text-shadow: 0 0 10px #000;">
+
+        <!-- Content -->
+
+    <h5 class="text-uppercase" style="font-family: 'Chau Philomene One';">Sakindu Dehipitiya</h5>
+        <p style="font-family:monospace; word-spacing:-1px; font-size:15px;">" I'm a Full-Stack Web Developer..<br>I like making Web Apps with Django and I work on AI projects<br> and I'm a Python(language) enthusiast!!! "</p>
+
+      </div>
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none pb-3 text-muted">
+
+      <!-- Grid column -->
+
+
+      <!-- Grid column -->
+      <div style="padding: 20px;" class="socials col-12">
+        <div class="container text-center">
+        <!-- Links -->
+        <h5 class="h5-responsive" style="font-family: 'Chau Philomene One';text-shadow: 0 0 10px #000;">Let's be Social, Follow Me On:</h5>
+
+        <div class="row align-items-center text-center footer-linkings">
+            <a href="https://github.com/Sakindu-d/" target="_blank" class="text-light col d-flex align-items-center font-small btn l" ><i class="fa fa-github fa-2x"></i> <span>GitHub</span></a>
+
+            <a href="https://dev.to/sakindu" target="_blank" class="col d-flex align-items-center font-small btn text-light l">
+              <i class="fab fa-dev fa-2x"></i> DEV
+            </a> 
+
+            <a href="mailto: dehipitiya@gmail.com" target="_blank" class="col d-flex align-items-center font-small btn text-light l"><i class="far fa-envelope fa-2x"></i><span>Email</span></a>
+
+            <a href="https://disqus.com/by/Sakindu/" target="_blank" class="text-light col d-flex align-items-center font-small btn l" style="transform: translateY(2px) translateX(-2px);"><span class="iconify" data-icon="mdi-disqus" data-inline="false" height="35px" width="35px"></span> Disqus</a>
+
+            <a href="https://t.me/Gayan_Shyamal" class="text-light col d-flex align-items-center font-small btn l" style="transform: translateX(-1px);"><i class="fab fa-telegram fa-2x"></i><span>Telegram</span></a>
+            <a href="https://sololearn.com/Profile/18330731/?ref=app" target="_blank" class="text-light col d-flex align-items-center font-small btn l"  style="transform: translateX(-6px);">
+            
+              <svg viewbox="-10 40 100 100" height="50" width="50"  style="transform: translateY(5px);">
+                <path d= "m 110.98775,333.22078 c -16.677363,-8.32532 -27.90454,-16.1881 -37.556549,-26.3021 -15.747874,-16.50166 -24.007216,-38.30364 -21.77522,-57.47951 2.02316,-17.38169 13.242975,-34.73733 31.10521,-48.11584 8.871414,-6.64454 25.492409,-15.85558 26.604349,-14.74363 0.18869,0.18869 -1.32288,3.10114 -3.35904,6.47211 -7.724441,12.78821 -14.317793,28.63551 -16.828939,40.44881 -1.501328,7.06277 -1.518834,26.99892 -0.03244,36.93448 2.833982,18.9432 13.316239,40.15634 32.280329,65.32633 1.40597,1.86607 2.28445,3.38158 1.95216,3.36781 -0.33228,-0.0138 -5.90772,-2.67258 -12.38986,-5.90846 z"
+                    opacity="1" fill="#fafafa" fill-opacity="1" stroke-width="1" 
+                    transform="scale(0.26458333)"
+                  />
+                  
+                  <path d="m 103.20322,280.92068 c -4.542669,-12.7534 -5.285973,-17.25465 -5.304655,-32.12354 -0.01455,-11.58321 0.165419,-13.53307 1.816379,-19.67898 3.788136,-14.10183 9.051746,-23.43846 18.756136,-33.2698 8.97668,-9.0941 19.77053,-15.5778 31.69048,-19.03598 4.75428,-1.37929 7.05604,-1.5779 17.6119,-1.51966 11.13534,0.0615 12.83246,0.24828 20.45405,2.25174 10.71763,2.8173 22.13911,7.66411 32.13917,13.63857 l 7.96221,4.75697 -17.77771,0.42341 c -18.91153,0.4504 -22.99677,1.03659 -32.77772,4.70325 -21.8036,8.17367 -40.36803,22.79094 -53.31366,41.97813 -7.85076,11.63589 -12.17807,21.6994 -15.91114,37.00262 l -2.29924,9.42537 z"
+                      opacity="1" fill="#fafafa" fill-opacity="1" stroke-width="1"
+                      transform="scale(0.26458333)"
+                  />
+                  
+                  <path d="m 277.41632,306.09179 c 0,-1.82469 -12.33803,-25.30913 -16.88498,-32.13917 -9.96951,-14.97538 -25.03791,-26.73779 -42.10161,-32.86456 -11.55738,-4.14971 -18.56064,-5.1489 -36.01341,-5.13824 -17.40021,0.0106 -25.3018,1.06667 -38.00365,5.07919 -3.13582,0.9906 -5.82567,1.67691 -5.97745,1.52513 -0.15178,-0.15178 2.54728,-3.19488 5.9979,-6.76243 10.91362,-11.28342 25.16163,-19.20318 43.56933,-24.21799 10.13742,-2.76173 18.03706,-3.84368 27.9853,-3.83289 10.7074,0.0116 16.70553,1.17013 23.32976,4.50604 19.765,9.9535 32.30397,29.56373 37.82403,59.15464 1.42017,7.61297 2.27287,35.60992 1.08458,35.60992 -0.44539,0 -0.8098,-0.41384 -0.8098,-0.91964 z" 
+                      opacity="1" fill="#fafafa" fill-opacity="1" stroke-width="1"
+                      transform="scale(0.26458333)"
+                  />
+                  
+                  <path d="m 54.794961,65.23721 c 4.56088,1.876443 7.67464,3.735561 10.41602,6.219008 4.47273,4.05192 7.07119,9.646408 6.85069,14.749517 -0.19986,4.625638 -2.82709,9.421127 -7.28357,13.294757 -2.21333,1.923868 -6.42235,4.673918 -6.73714,4.401858 -0.0534,-0.0461 0.28949,-0.84376 0.76202,-1.77244 1.79261,-3.523054 3.22797,-7.831603 3.66361,-10.997201 0.26047,-1.892605 -0.11802,-7.153791 -0.70077,-9.7471 -1.11187,-4.944359 -4.28562,-10.340749 -9.77363,-16.618299 -0.40686,-0.465409 -0.66781,-0.848448 -0.57986,-0.851193 0.088,-0.0024 1.61033,0.591726 3.38303,1.321062 z"
+                      opacity="1" fill="#fafafa" fill-opacity="1" stroke-width="0.26458332"
+                  />
+      
+                  <path d="m 60.708605,84.623365 c -0.21395,4.927165 -0.903627,8.487532 -2.307038,11.909958 -2.289788,5.583937 -6.667481,9.929737 -11.541504,11.457447 -4.418006,1.38476 -9.821026,0.54453 -14.979066,-2.32943 -2.561785,-1.42737 -6.579065,-4.45063 -6.430236,-4.83918 0.02524,-0.0659 0.891929,-0.0146 1.925933,0.11401 3.922636,0.48802 8.462512,0.37292 11.587624,-0.29371 1.868398,-0.39855 6.687441,-2.543298 8.928099,-3.97304 4.271736,-2.72672 8.267532,-7.546169 12.305161,-14.841601 0.299337,-0.540877 0.570837,-0.916502 0.603317,-0.834724 0.0322,0.0819 -0.009,1.715563 -0.0921,3.630653 z"
+                      opacity="1" fill="#fafafa" fill-opacity="1" stroke-width="0.26458332"
+                  />
+                  
+               <path d="m 45.427194,94.504045 c -4.24616,2.508559 -7.60633,3.8728 -11.24025,4.563593 -5.92899,1.127092 -11.959342,-0.17116 -15.898603,-3.422706 -3.570687,-2.947316 -5.813968,-7.933969 -6.219151,-13.824731 -0.201287,-2.925687 0.141029,-7.941813 0.547846,-8.029041 0.06903,-0.01481 0.498827,0.739539 0.955096,1.676313 1.730912,3.553768 4.303959,7.295874 6.567475,9.551384 1.353278,1.348493 5.779677,4.217336 8.200507,5.314944 4.61558,2.09267 10.83456,2.812455 19.15146,2.216583 0.6166,-0.04415 1.07952,-0.02156 1.02871,0.05029 -0.0511,0.07164 -1.44271,0.928363 -3.0931,1.903388 z"
+                  opacity="1" fill="#fafafa" fill-opacity="1" stroke-width="0.26458332"
+                  />
+            </svg> 
+            <span>Sololearn</span>
+            
+            </a>
+        </div>
+        </div>
+      </div>
+      <!-- Grid column -->
+
+
+    
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3" style="font-family:monospace; font-size:15px; background:#14141f; box-shadow: 0 -5px 15px #000;">© 2020 Copyright:
+    <a href="/" style="color: blanchedalmond;">https://sakindu.dev.com</a><br><span style="font-variant:small-caps; font-size:20px; letter-spacing:1px;">made with django</span>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+</section>
+<!-- Footer -->
+<script>
+  $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+  </script>
+    <script type='text/javascript'>
+      function search() {
+                var m = document.getElementsByClassName("card");
+                var inp = document.getElementById("inp").value.toUpperCase();
+                for (var i = 0; i <= m.length - 1; i++) {
+                    if (m[i].innerHTML.toUpperCase().indexOf(inp) != -1) {
+                        m[i].style.display = "";
+                    } else {
+                        m[i].style.display = "none";
+                    }
+                }
+            }
+      function scrolltop() {
+        window.scrollTo(0,0);
+      }
+      function share() { 
+      //Share on whatsapp
+        window.open( 
+            "https://api.whatsapp.com/send?text= " + window.location.href, 
+
+            
+            '_blank'  
+        ); 
+      } 
+      
+
+
+
+
+
+      
+
+      
+    </script>
+    <script defer>
+      var nav = document.querySelector('#nav-b');
+
+
+      var browser_theme = document.querySelector(".meta");
+
+      nav.style.transition = "1s ease-out";
+
+      browser_theme.style.transition = "1s ease-in";
+
+      document.getElementById("scrollIndicator").style.width = "0px";
+
+      window.onscroll = function(){
+        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  var scrolled = (winScroll / height) * 100;
+  document.getElementById("scrollIndicator").style.width = scrolled + "%";
+
+      
+          if(window.scrollY > 500){
+            
+
+            
+            browser_theme.setAttribute("content","#343a40");
+            nav.classList.remove("bg-white","navbar-light");
+
+            nav.style.boxShadow = " 0 6px 20px rgb(83, 80, 80)";
+            nav.classList.add("bg-dark","navbar-dark");
+          }else{
+            
+
+            browser_theme.setAttribute("content","#f8f9fa");
+            nav.classList.remove("bg-dark","navbar-dark");
+
+            nav.style.boxShadow = "";
+            nav.classList.add("bg-white","navbar-light","shadow");
+          }
+
+
+      }
+    </script>
+    <script
+    src="https://kit.fontawesome.com/836a943e18.js"
+    crossorigin="anonymous"></script>
+    
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>
+

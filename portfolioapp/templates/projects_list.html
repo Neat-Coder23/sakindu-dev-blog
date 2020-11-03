@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block meta %}
+
+    <meta name="description" content="Sakindu blog | Explore my projects here.. Available with various technologies , Nodejs, Django, C++ in AI, Python in AI, etc. You can also have tutorials on these projects in my posts page!! Have nice time.. - Sakindu">
+
+
+    <title>Explore My Projects | Sakindu</title>
+
+    <meta name="keywords" content="Django,Nodejs,Node.js,Python,Arduino,Raspberry pi,AI">
+{% endblock %}
+
+{% block page-content %}
+<div>
+<h2 style="margin-left: 10px;">Projects</h2><br>
+<div class="row" style="padding: 10px 10px 50px 10px;">
+    
+    {% for project in projects %}
+        <div class="col-md-4">
+            <div class="card mb-2"  style="box-shadow: 0 0 20px 2px gray; margin: 0 0 30px 0;">
+                <div style='overflow: hidden; max-height: auto; max-width: 100%;'><img class="card-img-top" src="{{ project.image }}"></div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ project.title }}</h5>
+                    <p class="card-text"> {{ project.body_summary|striptags }}</p>
+                    <a href="{% url 'project_detail' project.pk %}"
+                       class="btn btn-primary stretched-link">
+                        Read More
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+    {% endblock %}

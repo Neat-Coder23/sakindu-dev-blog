@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block meta %}
+
+    <meta name="description" content="Sakindu. Read Project {{ project.title }}..  {{ project.desc_summary|striptags }} - Sakindu">
+
+
+    <title>{{ project.title }} | Sakindu</title>
+
+    <meta name="keywords" content="{{ project.tech }}">
+{% endblock %}
+{% block page-content %}
+<div class="container-fluid my-project">
+<h1 style="margin-left: 10px; margin-bottom: 20px; font-size: 45px;" class="card-title">{{ project.title }}</h1>
+<div class="row" style="padding-left: 10px; padding-bottom:20px;">
+    <div class="col-md-7" >
+        <img src="{{ project.image }}" alt="" style="border-radius: 10px;" class="img-fluid shadow">
+    </div>
+    <div class="col-md-5">
+        <div class="shadow bg-white" style="padding:10px; margin:30px 0;">
+        
+        <p style="border-radius:15px;" class="post-content">{{ project.formatted_markdown|safe }}</p>
+        </div>
+        <br>
+        <h5>Technology(s) used:</h5>
+        <p class="bg-dark text-white" style="display: inline-block; padding: 10px; border-radius: 7px; font-family: monospace; word-spacing: 5px;">{{ project.tech }}</p>
+    </div>
+</div>
+<div class="row" style="margin-top:20px;"><button onclick="share()" class="btn bg-primary text-white col-12 shadow-lg" style="font-family:'Londrina Solid'; font-size:25px;">SHARE ON WHATSAPP</button></div>
+</div>
+ {% endblock %}

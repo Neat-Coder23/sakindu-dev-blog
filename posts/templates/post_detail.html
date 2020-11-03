@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block meta %}
+
+    <meta name="description" content="Sakindu Blog | {{ post.title }}..  {{ post.body_summary|striptags }} - Sakindu">
+
+
+    <title>{{ post.title }} | Sakindu</title>
+
+    <meta name="keywords" content="Django,Nodejs,Node.js,Python,Arduino,Raspberry pi">
+{% endblock %}
+
+{% block page-content %}
+<div class="container-fluid">
+    <h2 style="padding-left: 20px;">{{ post.title }}  <br><mark style="color: gray; font-size: 15px;">Published on: {{ post.published_date }}</mark></h2><br>
+    <div class='img-fluid'>
+        <img src='{{ post.image }}' style="width:100%; min-height: 120px; border-radius: 1vw; max-height: 90vh;">
+    </div><br>
+    <div style="padding: 20px; background: rgba(255, 251, 251, 0.753); font-family:'Chau Philomene One'; letter-spacing:1px;" class=" shadow-lg container-fluid post-content">{{ post.formatted_markdown|safe }}</div><br>
+    <div class="row"><button onclick="share()" class="btn bg-primary text-white col-12 shadow-lg" style="font-family:'Londrina Solid'; font-size:25px;">SHARE ON WHATSAPP</button></div><br>
+    <div style="padding-left:10px;  margin-top: 50px;" id="comments">
+        <h2>{{ comments.count }} {% if comments.count == 1 %}Comment{% else %}Comments{% endif %} on "<span class="commentitle" onclick="scrolltop()" style="cursor:pointer;">{{ post.title }}</span>":</h2><br>
+        {% for comment in comments %}
+          <div class="media border p-3 shadow col-12" style="border-radius: 10px; padding-left: 10px;">
+            <img src="https://cdn0.iconfinder.com/data/icons/business-and-marketing-21/32/finance_profile_person-128.png" alt="{{ comment.author }}" class="mr-3 mt-3 rounded-circle shadow" style="width:60px;">
+            <div class="media-body">
+              <h4>{{ comment.author }}  <mark class="text-muted" style="font-size: 12px;">On {{comment.pub_date.date }}&nbsp;</mark></h4>
+              <p style="max-width:80%;">{{ comment.comment }}</p>
+            </div>
+          </div>
+          {% empty %}
+          <pre class="text-secondary">"Be the <b>first</b> to comment!!!"<br><footer>-Sakindu</footer></pre>
+        {% endfor %}
+    </div>
+    
+    <div style="padding: 10px; border-radius: 10px;  margin: 30px 0;" class="shadow bg-white col-12">
+    <h3 class="text-muted">Leave a comment:</h3>
+        <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.author }}
+        </div>
+        <div class="form-group">
+            {{ form.body }}
+        </div>
+        <button type="submit" class="btn btn-primary shadow">Post Comment</button>
+        </form>
+    </div>
+    
+        
+            
+        
+    
+
+    </div>
+
+    
+    
+</div>
+
+{% endblock %}
