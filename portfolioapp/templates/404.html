@@ -8,39 +8,12 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <style>
-        @keyframes error{
-            0%{
-                text-shadow: 0 0 0px #790000,0 0 0 rgb(144, 0, 201);
-            }
-            50%{
-                text-shadow: 5px 0px 0.6px #860000,3px 0 0 rgb(144, 0, 201);
-            }
-            
-            70%{
-                text-shadow: -3px 0px 0px #880000,-5px 0 0 rgb(144, 0, 201);
-            }
-            100%{
-                text-shadow: 0 0 0.5px #700000,2px 0 0 rgb(144, 0, 201);
-            }
-        }
-        @keyframes shake{
-            60%{
-                transform: translateX(2px);
-            }
-            70%{
-                transform: translateX(0px);
-            }
-        }
-        .code{
-            animation: error 0.3s infinite;
-        }
+        
         body{
             user-select: none;
             
         }
-        .text-warning,.text-primary, .text-success{
-            animation: shake 0.3s infinite;
-        }
+        
     </style>
     <link rel="stylesheet" href="{% static 'main.css'%}">
 </head>
@@ -104,22 +77,18 @@
           
         </div>
       </nav>
-    <div style="min-height: 100vh; width:100%; background: url(https://i.pinimg.com/originals/f8/3a/a1/f83aa1968701ea2414806ef730473fec.gif); background-size: cover;
-    background-position: center; display: flex; align-items: center; justify-content: center; color: blanchedalmond; backdrop-filter: blur(3px);">
-    <div style="text-align: center; text-shadow: 0 0 80px #000; font-family: monospace;">
+    <div style="min-height: 100vh; width:100%; background: url({% static '404_error.jpg' %}); background-size: cover;
+    background-position: center; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(3px);" class="text-dark">
+    <div style="text-align: center; text-shadow: 0 0 30px #000; font-family: monospace; background:rgba(255, 255, 255, 0.623); border-radius: 5px;">
         
-        <h1 style="font-size: 55px; font-family: monospace;" class="code">404 Error</h1>
-        <span style="font-family: 'Courier New', Courier, monospace; font-size: 50px;" class="code">Page Not Found.</span><br>
-        <p style="background-color: rgba(48, 36, 36, 0.555); padding: 5px; font-size: 14px; text-shadow: 1px 3px 2px #ce0202; max-width: 100%;" class="rounded code"><span class="text-warning">this_page</span><span class="text-info">.not_found</span>=<span class="text-warning">True;</span><br>
-        <span class="text-primary">if(</span><span class="text-info">you_spelt_it_wrong</span><span class="text-primary">=</span><span class="text-warning">True</span><span class="text-primary">){</span><span class="text-warning">try_again();</span><span class="text-primary">}</span><br>
-        <span class="text-primary">elseif(</span><span class="text-info">the_page_I_hv_returned_to_you_is_wrong</span><span class="text-primary">=</span><span class="text-warning">True</span><span class="text-primary">){</span><br>
-        <span class="text-warning">print(</span><span class="text-success">"Sorry about that.. Let's return <a href="/">Home</a>"</span><span class="text-warning">);</span><span class="text-primary">}</span>
-        </p><br><br>
-        <span style="font-family: 'Courier New', Courier, monospace; font-size: 30px; margin-bottom: 25px;" class="code">You May Try These Links:</span><br>
-        <div class="row align-itens-center">
-            <a href="/" class="code col-4 h4 row justify-content-center">Home</a>
-            <a href="/posts/" class="code col-4 h4 row justify-content-center">Posts</a>
-            <a href="/projects/" class="code col-4 h4 row justify-content-center">Projects</a>
+        <h1 style="font-size: 55px; font-family: monospace;" class="code"><b>404 Error</b></h1>
+        <span style="font-family: 'Courier New', Courier, monospace; font-size: 50px;" class="code"><b>Page Not Found.</b></span><br>
+        <br>
+        <span style="font-family: 'Courier New', Courier, monospace; font-size: 30px;" class="code"><b>You May Try These Links:</b></span><br>
+        <div class="row align-itens-center" style="transform: translateY(30px);">
+            <a href="/" class="code col-4 h4 row justify-content-center"><kbd>Home</kbd></a>
+            <a href="/posts/" class="code col-4 h4 row justify-content-center"><kbd>Posts</kbd></a>
+            <a href="/projects/" class="code col-4 h4 row justify-content-center"><kbd>Projects</kbd></a>
         </div>
     </div>
     </div>

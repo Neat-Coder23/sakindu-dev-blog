@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect,render_to_response
+from django.shortcuts import render,redirect
 from .models import Projects
 from .forms import ProjectForm
 
