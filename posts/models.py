@@ -19,7 +19,9 @@ class Post(models.Model):
 class Comments(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
     author = models.CharField(max_length=100)
+    email = models.EmailField(null=True)
     comment = models.TextField()
     post = models.ForeignKey('Post', on_delete=models.CASCADE)
+    moderator = models.BooleanField(default=False)
 
     

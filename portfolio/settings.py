@@ -27,9 +27,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '4mn@&e_ooct5!7j^qo=u6op(qda+(bc#ur9ngo+sps6#$!5w-o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
+EMAIL_HOST_USER = 'sakindu.app@gmail.com'
 
 
 # Application definition
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     'portfolioapp',
     'markdownx',
     'posts',
+    'index',
 ]
 
 MIDDLEWARE = [
@@ -57,6 +59,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'portfolio.urls'
+EMAIL_PORT = 587
 
 TEMPLATES = [
     {
@@ -86,6 +89,8 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
 
 
 # Password validation
@@ -117,6 +122,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_L10N = True
+EMAIL_HOST_PASSWORD = 'gsink123!'
 
 USE_TZ = True
 
@@ -137,4 +143,10 @@ MARKDOWNX_MEDIA_PATH = datetime.now().strftime('markdownx/%Y/%m/%d')
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
 # Extra lookup directories for collectstatic to find static files
+
+
+EMAIL_USE_TLS = True
+
+

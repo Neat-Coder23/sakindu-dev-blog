@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import handler404
+import portfolioapp
 
 urlpatterns = [
     path('admin/', admin.site.urls, name="admin"),
@@ -24,3 +26,5 @@ urlpatterns = [
     path('posts/', include('posts.urls')),
 
 ]
+
+handler404 = portfolioapp.views.handler404

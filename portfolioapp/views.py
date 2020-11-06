@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,render_to_response
 from .models import Projects
 from .forms import ProjectForm
 
@@ -22,3 +22,5 @@ def new_project(request):
         pjform = ProjectForm()
     return render(request, 'project_new.html',{'form':pjform})
 
+def handler404(request,exception):
+    return render(request,'404.html',status=404)

@@ -17,6 +17,13 @@ class CommentsForm(forms.Form):
             "placeholder": "What Should I call you?"
         })
     )
+    email = forms.EmailField(
+        max_length=100,
+        widget=forms.TextInput(attrs={
+            "class": "form-control",
+            "placeholder": "Your Email here... You will never be spammed"
+        })
+    )
     body = forms.CharField(widget=forms.Textarea(
         attrs={
             "class": "form-control",

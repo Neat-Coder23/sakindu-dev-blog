@@ -3,7 +3,7 @@
 
 {% block meta %}
 
-    <meta name="description" content="Sakindu Blog | {{ post.title }}..  {{ post.body_summary|striptags }} - Sakindu">
+    <meta name="description" content="Sakindu Blog | {{ post.title }}..  {{ comments.count }} comments. {{ post.body_summary|striptags }} - Sakindu">
 
 
     <title>{{ post.title }} | Sakindu</title>
@@ -23,9 +23,9 @@
         <h2>{{ comments.count }} {% if comments.count == 1 %}Comment{% else %}Comments{% endif %} on "<span class="commentitle" onclick="scrolltop()" style="cursor:pointer;">{{ post.title }}</span>":</h2><br>
         {% for comment in comments %}
           <div class="media border p-3 shadow col-12" style="border-radius: 10px; padding-left: 10px;">
-            <img src="https://cdn0.iconfinder.com/data/icons/business-and-marketing-21/32/finance_profile_person-128.png" alt="{{ comment.author }}" class="mr-3 mt-3 rounded-circle shadow" style="width:60px;">
+            <img src="{% if comment.moderator == False %}https://cdn0.iconfinder.com/data/icons/business-and-marketing-21/32/finance_profile_person-128.png{% else %}{% static 'sakindu.png' %}{% endif %}" alt="{{ comment.author }}" class="mr-3 mt-3 rounded-circle shadow" style="width:60px;">
             <div class="media-body">
-              <h4>{{ comment.author }}  <mark class="text-muted" style="font-size: 12px;">On {{comment.pub_date.date }}&nbsp;</mark></h4>
+              <h4 style="white-space: nowrap;">{{ comment.author }} {% if comment.moderator == True %}<pre class="bg-danger text-white rounded" style="display:inline; font-size: 15px; padding: 2px; top:-5px;">Site Owner</pre>{% endif %} <br><mark class="text-muted" style="font-size: 12px;">{{comment.pub_date.date }}&nbsp;</mark></h4>
               <p style="max-width:80%;">{{ comment.comment }}</p>
             </div>
           </div>
@@ -40,6 +40,9 @@
         {% csrf_token %}
         <div class="form-group">
             {{ form.author }}
+        </div>
+        <div class="form-group">
+            {{ form.email }}
         </div>
         <div class="form-group">
             {{ form.body }}
