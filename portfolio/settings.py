@@ -15,6 +15,7 @@ import os
 from datetime import datetime
 
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -47,8 +48,7 @@ INSTALLED_APPS = [
     'posts',
     'index',
 ]
-with open(keytxt) as key:
-    SECRET_KEY = key.read().strip()
+SECRET_KEY = "4mn@&e_ooct5!7j^qo=u6op(qda+(bc#ur9ngo+sps6#$!5w-o"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -125,9 +125,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-pdtxt = os.path.join(BASE_DIR,"key.txt")
-with open(pdtxt) as pd:
-    EMAIL_HOST_PASSWORD = pd.read().strip()
+EMAIL_HOST_PASSWORD = "vlloithyuvfirhxl"
 
 USE_TZ = True
 
