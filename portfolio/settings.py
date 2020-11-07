@@ -28,7 +28,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 keytxt = os.path.join(BASE_DIR,"key.txt")
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 EMAIL_HOST_USER = 'sakindu.app@gmail.com'
@@ -125,7 +125,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-EMAIL_HOST_PASSWORD = "vlloithyuvfirhxl"
+EMAIL_HOST_PASSWORD = "gsink123!"
 
 USE_TZ = True
 
