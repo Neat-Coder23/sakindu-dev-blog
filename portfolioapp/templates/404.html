@@ -1,100 +1,129 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    {% load static %}
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>404 Page Not Foud | Sakindu Blog</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Sakindu">
+
+<meta name="description" content="404 Page Not Found.. Maybe You hv followed a wrong path | Sakindu Blog"
+
+<link rel="icon" href="https://cdn.jsdelivr.net/gh/Sakindu-d/SnapMusic/logo.jpg" type="image/gif">
+
+<title>404 Page Not Found | Sakindu Blog</title>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Quicksand:700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Chau+Philomene+One:ital@1&display=swap" rel="stylesheet">
+
+
+
+<link type="text/css" rel="stylesheet" href="https://colorlib.com/etc/404/colorlib-error-404-14/css/font-awesome.min.css" />
+
+<link type="text/css" rel="stylesheet" href="https://colorlib.com/etc/404/colorlib-error-404-14/css/style.css" />
+
+
+<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
     <style>
-        
-        body{
-            user-select: none;
-            
-        }
-        
+      body{
+        user-select: none;
+      }
+      .scale{
+        transform: scale(1.7);
+      }
+      .special{
+        font-family: 'Chau Philomene One',sans-serif;
+      }
     </style>
-    <link rel="stylesheet" href="{% static 'main.css'%}">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg nav-col navbar-dark fixed-top bg-dark" id="nav-b">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand special" href="/">
-          <img src="https://cdn.jsdelivr.net/gh/Sakindu-d/SnapMusic/logo.jpg" width="30" height="30" class="d-inline-block align-top rounded" alt="" style="box-shadow:  0 0 10px rgb(124, 118, 134);">
-          SAKINDU
-        </a>
+  <nav class="navbar navbar-expand-lg fixed-top nav-col navbar-light bg-white shadow" id="nav-b">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand special" href="/">
+      <img src="https://cdn.jsdelivr.net/gh/Sakindu-d/SnapMusic/logo.jpg" width="30" height="30" class="d-inline-block align-top rounded" alt="Sakindu's logo" style="box-shadow:  0 0 10px rgb(124, 118, 134);">
+      SAKINDU
+    </a>
+  
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item {% if request.path == '' %}active{% endif %}">
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+        {% if user.is_authenticated and not request.path == '/projects/new/' %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'new_project' %}">New Project</a>
+        </li>
+        {% endif %}
+        {% if user.is_authenticated and not request.path == '/posts/new/' %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'post_new' %}">New Post</a>
+        </li>
+        {% endif %}
+        {% if not request.path == '/projects/' %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'projects_list' %}">Projects</a>
+        </li>
+        {% endif %}
+        {% if not request.path == '/posts/' %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'posts_list' %}">Posts</a>
+        </li>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/">Admin</a>
+        </li>
+        {% endif %}
+      </ul>
       
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item {% if request.path == '' %}active{% endif %}">
-              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-            </li>
-            {% if user.is_authenticated and not request.path == '/projects/new/' %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'new_project' %}">New Project</a>
-            </li>
-            {% endif %}
-            {% if user.is_authenticated and not request.path == '/posts/new/' %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'post_new' %}">New Post</a>
-            </li>
-            {% endif %}
-            {% if not request.path == '/projects/' %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'projects_list' %}">Projects</a>
-            </li>
-            {% endif %}
-            {% if not request.path == '/posts/' %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'posts_list' %}">Posts</a>
-            </li>
-            {% endif %}
-            {% if user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-link" href="/admin/">Admin</a>
-            </li>
-            {% endif %}
-          </ul>
-          {% if request.path == '/projects/' %}
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search Projects.." aria-label="Search" id="inp" oninput="search()">
-            
-          </form>
-          {% elif request.path == '/posts/' %}
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search Posts.." aria-label="Search" id="inp" oninput="search()">
-            
-          </form>
-          {% elif request.path == '/' %}
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search Posts and Projects.." aria-label="Search" id="inp" oninput="search()">
-            
-          </form>
-          {% endif %}
-          
-        </div>
-      </nav>
-    <div style="min-height: 100vh; width:100%; background: url({% static '404_error.jpg' %}); background-size: cover;
-    background-position: center; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(3px);" class="text-dark">
-    <div style="text-align: center; text-shadow: 0 0 30px #000; font-family: monospace; background:rgba(255, 255, 255, 0.623); border-radius: 5px;">
-        
-        <h1 style="font-size: 55px; font-family: monospace;" class="code"><b>404 Error</b></h1>
-        <span style="font-family: 'Courier New', Courier, monospace; font-size: 50px;" class="code"><b>Page Not Found.</b></span><br>
-        <br>
-        <span style="font-family: 'Courier New', Courier, monospace; font-size: 30px;" class="code"><b>You May Try These Links:</b></span><br>
-        <div class="row align-itens-center" style="transform: translateY(30px);">
-            <a href="/" class="code col-4 h4 row justify-content-center"><kbd>Home</kbd></a>
-            <a href="/posts/" class="code col-4 h4 row justify-content-center"><kbd>Posts</kbd></a>
-            <a href="/projects/" class="code col-4 h4 row justify-content-center"><kbd>Projects</kbd></a>
-        </div>
+      
     </div>
-    </div>
+  </nav>
+<div id="notfound">
+<div class="notfound">
+<div class="notfound-bg">
+<div></div>
+<div></div>
+<div></div>
+</div>
+<h1>oops!</h1>
+<h2>Error 404 : Page Not Found</h2><br>
+<h5 style="font-family: 'Quicksand',sans-serif;">Looks like the page you requested has <b>moved</b> or not <b>available</b>..</h5>
+<a href="/">Go Home</a>
+<div class="notfound-social">
+<a href="https://github.com/Sakindu-d/"><i class="fa fa-github scale"></i></a>
+<a href="https://dev.to/sakindu"><i class="fab fa-dev scale"></i></a>
+<a href="mailto: dehipitiya@gmail.com"><i class="far fa-envelope scale"></i></a>
+<a href="https://t.me/Gayan_Shyamal"><i class="fab fa-telegram scale"></i></a>
+</div>
+<h6 style="transform: translateY(40px);">&copy; 2020 Copyright: <span style="text-decoration: none;" class="text-secondary" id="a-to-home">https://sakindu.dev.com</span></h6>
+</div>
+</div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script>
+  document.getElementById("a-to-home").onclick = function(){
+    window.open(
+      "/", '_self'
+    )
+  }
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+<script
+    src="https://kit.fontawesome.com/836a943e18.js"
+    crossorigin="anonymous"></script>
 </body>
 </html>

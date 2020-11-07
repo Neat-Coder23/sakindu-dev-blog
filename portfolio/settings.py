@@ -24,8 +24,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '4mn@&e_ooct5!7j^qo=u6op(qda+(bc#ur9ngo+sps6#$!5w-o'
 
+keytxt = os.path.join(BASE_DIR,"key.txt")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'posts',
     'index',
 ]
+with open(keytxt) as key:
+    SECRET_KEY = key.read().strip()
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -122,7 +124,10 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_L10N = True
-EMAIL_HOST_PASSWORD = 'gsink123!'
+
+pdtxt = os.path.join(BASE_DIR,"key.txt")
+with open(pdtxt) as pd:
+    EMAIL_HOST_PASSWORD = pd.read().strip()
 
 USE_TZ = True
 
